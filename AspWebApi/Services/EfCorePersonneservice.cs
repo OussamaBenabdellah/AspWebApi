@@ -3,8 +3,7 @@ using AspWebApi.Data.Models;
 using AspWebApi.DTO;
 using AspWebApi.Models;
 using Microsoft.EntityFrameworkCore;
-
-namespace AspWebApi.Services
+ namespace AspWebApi.Services
 {
     public class EfCorePersonneservice : IPersonService
     {

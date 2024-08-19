@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspWebApi;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using FluentValidation;
 using System;
@@ -87,6 +88,7 @@ builder.Services.AddStackExchangeRedisCache(opt =>
     opt.Configuration = "localhost:6379";
 });
 
+//h
 //builder.Services.AddDistributedSqlServerCache(); 
 #endregion
 
@@ -520,6 +522,7 @@ app.MapGet("persons", async (
     var peopole = await service.GetAll();
     return Results.Ok(peopole);
 });
+
 app.MapGet("persons/{id:int}", async (
     [FromRoute] int id,
     [FromServices] IDistributedCache cache,
