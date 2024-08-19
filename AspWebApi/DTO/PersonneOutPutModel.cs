@@ -2,5 +2,6 @@
 {
     public record PersonneOutPutModel(int Id,
             string FullName,
-            DateTime? Birthday);
+            DateTime? Birthday,
+            string Address);
 }

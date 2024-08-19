@@ -13,11 +13,20 @@ using AspWebApi;
 using AspWebApi.Services;
 using AspWebApi.Models;
 using AspWebApi.DTO;
+using AutoMapper;
 #region configuration d'une Api 
 
 
 var builder = WebApplication.CreateBuilder();
+#region AutoMapper
+//   nos permet de valider notre configaration qui est normalement définie qpour les projet de test
+//new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingConfiguration>())
+//                                    .AssertConfigurationIsValid();
 
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<ApiMappingConfiguration>());
+                                    
+
+#endregion
 #region configuration logger
 
 
