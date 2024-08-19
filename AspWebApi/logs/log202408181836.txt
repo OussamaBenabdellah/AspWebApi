@@ -1,6 +1,0 @@
-2024-08-18 18:36:31.441 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:5003/Persons/1 - application/json 43
-2024-08-18 18:36:31.538 +02:00 [INF] Executing endpoint 'HTTP: GET persons/{id:int}'
-2024-08-18 18:36:31.766 +02:00 [INF] Setting HTTP status code 200.
-2024-08-18 18:36:31.769 +02:00 [INF] Writing value of type 'Personne' as Json.
-2024-08-18 18:36:31.777 +02:00 [INF] Executed endpoint 'HTTP: GET persons/{id:int}'
-2024-08-18 18:36:31.782 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:5003/Persons/1 - 200 null application/json; charset=utf-8 342.4269ms
