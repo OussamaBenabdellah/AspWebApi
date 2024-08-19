@@ -18,7 +18,7 @@ namespace AspWebApi.Validation
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.LastName).NotEmpty();
             //RuleFor(x => x.Birthday).LessThanOrEqualTo(DateTime.Now);
-             
+             ///cards
         }
     }
 }

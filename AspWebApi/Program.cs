@@ -101,7 +101,18 @@ builder.Services.AddStackExchangeRedisCache(opt =>
 //builder.Services.AddDistributedSqlServerCache(); 
 #endregion
 
+#region Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(); 
+
+#endregion
+
 var app = builder.Build();
+#region Support Swagger
+app.UseSwagger();
+app.UseSwaggerUI();
+#endregion
+
 #region création de base de donée 
 //quand l'app ce lance on demande a EF core de s'assuré que la BD est crée 
 //rt de s'assurer de la crée si elle n'existe pas 
@@ -523,6 +534,69 @@ await app.Services
 #endregion
 
 #region Utilisation du conteneur d'injection de dépendances avec les services  
+//app.MapGet("persons", async (
+//    [FromServices] IPersonService service,
+
+//    CancellationToken token) =>
+//{
+//    var peopole = await service.GetAll();
+//    return Results.Ok(peopole);
+//});
+
+//app.MapGet("persons/{id:int}", async (
+//    [FromRoute] int id,
+//    [FromServices] IDistributedCache cache,
+//    [FromServices] IPersonService service) =>
+//{
+//var peopole = await cache.GetAsync<PersonneOutPutModel>($"personne_{id}");
+//    if (peopole is not null)
+//    {
+//        peopole = await service.GetById(id);
+//        if (peopole is null) return Results.NotFound(); 
+//         await cache.SetAsync($"personne_{id}", peopole);
+//            return Results.Ok(peopole);
+
+//    }
+//    return Results.Ok(peopole);
+//});
+
+//app.MapDelete("persons/{id:int}", async (
+//    [FromRoute] int id,
+//    [FromServices] IPersonService service) =>
+//{
+//    var peopole = await service.Delete(id);
+//    if (peopole) return Results.Ok(peopole);
+//    return Results.NotFound();
+//});
+
+//app.MapPut("Persons/{id:int}", async (
+//    [FromRoute] int id,
+//    [FromBody] PersonneInPutModel po,
+//    [FromServices] IPersonService service) =>
+//{
+//    var result = await service.Update(id, po);
+//    if (result) return Results.Ok(po);
+//    return Results.NotFound();
+//});
+//app.MapPost("/Persons", async (
+//    [FromBody] PersonneInPutModel p,
+//    [FromServices] IPersonService service,
+//    [FromServices] IValidator<PersonneInPutModel> validator) =>
+//{
+//    if (!validator.Validate(p).IsValid)
+//    {
+//        return Results.BadRequest(validator.Validate(p).Errors.Select(e => new
+//        {
+//            Message = e.ErrorMessage,
+//            e.PropertyName
+//        }));
+//    }
+//    await service.Add(p);
+//    return Results.Ok(p);
+//});
+#endregion
+
+#region Swagger using 
 app.MapGet("persons", async (
     [FromServices] IPersonService service,
 
@@ -530,24 +604,29 @@ app.MapGet("persons", async (
 {
     var peopole = await service.GetAll();
     return Results.Ok(peopole);
-});
+})
+
+    .WithTags("PersonManagement");
 
 app.MapGet("persons/{id:int}", async (
     [FromRoute] int id,
     [FromServices] IDistributedCache cache,
     [FromServices] IPersonService service) =>
 {
-var peopole = await cache.GetAsync<PersonneOutPutModel>($"personne_{id}");
+    var peopole = await cache.GetAsync<PersonneOutPutModel>($"personne_{id}");
     if (peopole is not null)
     {
         peopole = await service.GetById(id);
-        if (peopole is null) return Results.NotFound(); 
-         await cache.SetAsync($"personne_{id}", peopole);
-            return Results.Ok(peopole);
-        
+        if (peopole is null) return Results.NotFound();
+        await cache.SetAsync($"personne_{id}", peopole);
+        return Results.Ok(peopole);
+
     }
     return Results.Ok(peopole);
-});
+})
+    .Produces(200)
+    .Produces(404)
+    .WithTags("PersonManagement");
 
 app.MapDelete("persons/{id:int}", async (
     [FromRoute] int id,
@@ -556,7 +635,10 @@ app.MapDelete("persons/{id:int}", async (
     var peopole = await service.Delete(id);
     if (peopole) return Results.Ok(peopole);
     return Results.NotFound();
-});
+})
+    .Produces(200)
+    .Produces(404)
+    .WithTags("PersonManagement");
 
 app.MapPut("Persons/{id:int}", async (
     [FromRoute] int id,
@@ -566,7 +648,11 @@ app.MapPut("Persons/{id:int}", async (
     var result = await service.Update(id, po);
     if (result) return Results.Ok(po);
     return Results.NotFound();
-});
+})
+    .Produces(200)
+    .Produces(404)
+    .WithTags("PersonManagement");
+
 app.MapPost("/Persons", async (
     [FromBody] PersonneInPutModel p,
     [FromServices] IPersonService service,
@@ -582,7 +668,12 @@ app.MapPost("/Persons", async (
     }
     await service.Add(p);
     return Results.Ok(p);
-});
+})
+    .Produces(200)
+    .Produces(404)
+    //cette methode explique que on attend un objet personneOutPutModel de format Json
+    .Produces<PersonneOutPutModel>(contentType: "application/json")
+    .WithTags("PersonManagement");
 #endregion
 app.Run();
 

@@ -362,4 +362,10 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+<<<<<<< HEAD
 /AspWebApi/Personne.cs
+=======
+
+>>>>>>> 3843c68f773a92adb465603b6abe6d3aa88391a8
+/.vs/AspWebApi/DesignTimeBuild/.dtbcache.v2
+/.vs/AspWebApi/v17/.suo
