@@ -1,0 +1,35 @@
+2024-08-19 15:58:27.810 +02:00 [INF] Request starting HTTP/1.1 PUT https://localhost:50597/Persons/2 - application/json 82
+2024-08-19 15:58:27.838 +02:00 [INF] Executing endpoint 'HTTP: PUT Persons/{id:int}'
+2024-08-19 15:58:27.855 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__person_Name_3='?' (Size = 5), @__person_Birthday_2='?' (DbType = DateTime), @__person_LastName_1='?' (Size = 4), @__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Personne" AS "p"
+SET "Name" = @__person_Name_3,
+    "Birthday" = @__person_Birthday_2,
+    "LastName" = @__person_LastName_1
+WHERE "p"."Id" = @__id_0
+2024-08-19 15:58:27.873 +02:00 [INF] Setting HTTP status code 200.
+2024-08-19 15:58:27.884 +02:00 [INF] Writing value of type 'Boolean' as Json.
+2024-08-19 15:58:27.896 +02:00 [INF] Executed endpoint 'HTTP: PUT Persons/{id:int}'
+2024-08-19 15:58:27.901 +02:00 [INF] Request finished HTTP/1.1 PUT https://localhost:50597/Persons/2 - 200 null application/json; charset=utf-8 93.8492ms
+2024-08-19 15:58:44.061 +02:00 [INF] Request starting HTTP/1.1 PUT https://localhost:50597/Persons/2 - application/json 82
+2024-08-19 15:58:44.063 +02:00 [INF] Executing endpoint 'HTTP: PUT Persons/{id:int}'
+2024-08-19 15:58:44.066 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__person_Name_3='?' (Size = 5), @__person_Birthday_2='?' (DbType = DateTime), @__person_LastName_1='?' (Size = 4), @__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Personne" AS "p"
+SET "Name" = @__person_Name_3,
+    "Birthday" = @__person_Birthday_2,
+    "LastName" = @__person_LastName_1
+WHERE "p"."Id" = @__id_0
+2024-08-19 15:58:44.069 +02:00 [INF] Setting HTTP status code 200.
+2024-08-19 15:58:44.070 +02:00 [INF] Writing value of type 'Boolean' as Json.
+2024-08-19 15:58:44.072 +02:00 [INF] Executed endpoint 'HTTP: PUT Persons/{id:int}'
+2024-08-19 15:58:44.073 +02:00 [INF] Request finished HTTP/1.1 PUT https://localhost:50597/Persons/2 - 200 null application/json; charset=utf-8 12.6095ms
+2024-08-19 15:58:53.472 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:50597/Persons/2 - application/json 82
+2024-08-19 15:58:53.484 +02:00 [INF] Executing endpoint 'HTTP: GET persons/{id:int}'
+2024-08-19 15:58:53.887 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Birthday", "p"."LastName", "p"."Name"
+FROM "Personne" AS "p"
+WHERE "p"."Id" = @__id_0
+LIMIT 1
+2024-08-19 15:58:53.989 +02:00 [INF] Setting HTTP status code 200.
+2024-08-19 15:58:53.993 +02:00 [INF] Writing value of type 'PersonneOutPutModel' as Json.
+2024-08-19 15:58:54.000 +02:00 [INF] Executed endpoint 'HTTP: GET persons/{id:int}'
+2024-08-19 15:58:54.002 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:50597/Persons/2 - 200 null application/json; charset=utf-8 529.9563ms

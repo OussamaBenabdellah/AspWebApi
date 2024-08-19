@@ -1,0 +1,15 @@
+2024-08-18 18:00:51.862 +02:00 [INF] Application is shutting down...
+2024-08-18 18:00:59.797 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+2024-08-18 18:00:59.827 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+2024-08-18 18:00:59.841 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-08-18 18:00:59.853 +02:00 [INF] No migrations were applied. The database is already up to date.
+2024-08-18 18:00:59.904 +02:00 [INF] Now listening on: https://localhost:50597
+2024-08-18 18:00:59.904 +02:00 [INF] Now listening on: http://localhost:50598
+2024-08-18 18:00:59.906 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 18:00:59.907 +02:00 [INF] Hosting environment: Development
+2024-08-18 18:00:59.908 +02:00 [INF] Content root path: C:\Users\salim\source\repos\OussamaBenabdellah\AspWebApi\AspWebApi
