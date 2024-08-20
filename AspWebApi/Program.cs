@@ -34,9 +34,7 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile<ApiMappingConfiguration>())
 
 /// la configuration des systeme de log ce fait  entre l'instantiation de WebApplicationBuilder  
 /// et WebApplication
-/// 
-
-//ClearProviders vas supprimer ce que AspNet a mis pâr default 
+/// clearProviders vas supprimer ce que AspNet a mis pâr default 
 builder.Logging.ClearProviders();
 //crée la configuration de Serielog pour logger dans la console 
 //  crée la "loggerconfiguration" de type LoggerConfiguration qui ce trouve
@@ -112,6 +110,7 @@ builder.Services.AddSwaggerGen();
 
 #endregion
 var app = builder.Build();
+
 #region Support Swagger
 
 //limiter l'accée a swager que pour le mode devloppement 
@@ -143,8 +142,7 @@ await app.Services
 
 #region Group Map
 //on groupe les EndPoint par préfix de la route
-app.MapGroup("/person")
-    .MapPersonEndpoint();
+app.MapPersonEndpoint();
 
 #endregion
 

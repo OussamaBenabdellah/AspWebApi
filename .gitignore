@@ -369,6 +369,8 @@ FodyWeavers.xsd
 
 /.vs/AspWebApi/DesignTimeBuild/.dtbcache.v2
 /.vs/AspWebApi/v17/.suo
+/AspWebApi/obj/AspWebApi.csproj.nuget.g.targets
+/AspWebApi/logs/log202408191602.txt
 /AspWebApi/obj/AspWebApi.csproj.nuget.dgspec.json
 /AspWebApi/obj/AspWebApi.csproj.nuget.g.props
 /AspWebApi/obj/AspWebApi.csproj.nuget.g.targets
