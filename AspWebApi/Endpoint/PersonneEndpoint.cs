@@ -9,7 +9,7 @@ namespace AspWebApi.Endpoint
 {
     public static class PersonneEndpoint
     {
-        public static RouteGroupBuilder MapPersonEndpoint(this RouteGroupBuilder group)
+        public static WebApplication MapPersonEndpoint(this WebApplication App)
         {
             //on dois remplacer app par group 
             //et enlever la route person 
@@ -562,35 +562,37 @@ namespace AspWebApi.Endpoint
 
             #region Group les Endpoint 
 
-            group.MapGet("", GetAll)
+            var groupMap = App.MapGroup("/Person").WithTags("PersonManagement");
 
+            groupMap.MapGet("", GetAll)
                 .WithTags("PersonManagement");
 
-            group.MapGet("/{id:int}", GetById)
+            groupMap.MapGet("/{id:int}", GetByd)
                 .Produces(200)
                 .Produces(404)
-                .WithTags("PersonManagement");
+                .Produces(201)
+                .WithName("GetById");
 
-            group.MapDelete("/{id:int}", DeleteById)
+            groupMap.MapDelete("/{id:int}", DeleteById)
                 .Produces(200)
                 .Produces(404)
-                .WithTags("PersonManagement");
+                 ;
 
-            group.MapPut("/{id:int}", PutById)
+            groupMap.MapPut("/{id:int}", PutById)
                 .Produces(200)
                 .Produces(404)
-                .WithTags("PersonManagement");
+                ;
 
-            group.MapPost("", Post)
+            groupMap.MapPost("", Post)
                 .Produces(200)
                 .Produces(404)
                 //cette methode explique que on attend un objet personneOutPutModel de format Json
                 .Produces<PersonneOutPutModel>(contentType: "application/json")
                 .Accepts<PersonneInPutModel>(contentType: "application/json")
-                .WithTags("PersonManagement");
+                ;
             #endregion
 
-            return group;
+            return App; 
         }
 
         public static async Task<IResult> GetAll
@@ -605,10 +607,13 @@ namespace AspWebApi.Endpoint
             }
         }
 
-        public static async Task<IResult> GetById(
+
+        public static async Task<IResult> GetByd(
                 [FromRoute] int id,
                 [FromServices] IDistributedCache cache,
-                [FromServices] IPersonService service)
+                [FromServices] IPersonService service,
+                [FromServices] LinkGenerator linkGenerator,
+                HttpContext httpContext)
         {
             var peopole = await cache.GetAsync<PersonneOutPutModel>($"personne_{id}");
             if (peopole is not null)
@@ -616,8 +621,10 @@ namespace AspWebApi.Endpoint
                 peopole = await service.GetById(id);
                 if (peopole is null) return Results.NotFound();
                 await cache.SetAsync($"personne_{id}", peopole);
-                return Results.Ok(peopole);
-
+                //var link = linkGenerator.GetPathByName("GetById", new { id = peopole.Id });
+                var path = linkGenerator.GetUriByName(httpContext, "GetById", new { id = peopole.Id });
+                //return Results.Created(link, peopole);
+                return Results.Created(path, peopole);
             }
             return Results.NotFound(peopole);
         }
@@ -626,7 +633,7 @@ namespace AspWebApi.Endpoint
                 [FromServices] IPersonService service)
         {
             var peopole = await service.Delete(id);
-            if (peopole) return Results.Ok(peopole);
+            if (peopole) return Results.Ok();
             return Results.NotFound();
         }
         public static async Task<IResult> PutById(
