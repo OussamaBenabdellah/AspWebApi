@@ -96,6 +96,7 @@ using Microsoft.EntityFrameworkCore;
         private readonly IMapper mapper;
         public EfCorePersonneservice(
              IMapper mapper, //interface fournie par auto mapper 
+             //on inject le service apidbcontext   
              ApiDbContext context)
         {
             this.mapper = mapper; 

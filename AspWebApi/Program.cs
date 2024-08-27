@@ -1,19 +1,9 @@
 ﻿using AspWebApi;
-using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using FluentValidation;
-using System;
-using AspWebApi.Validation;
 using AspWebApi.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Caching.Distributed;
-using AspWebApi;
 using AspWebApi.Services;
-using AspWebApi.Models;
-using AspWebApi.DTO;
-using AutoMapper;
 using AspWebApi.Endpoint;
 #region configuration d'une Api 
 
@@ -145,7 +135,10 @@ await app.Services
 app.MapPersonEndpoint();
 
 #endregion
-
+ app.Use(async (HttpContext ctx, RequestDelegate next) =>
+{
+  await  next(ctx);
+});
 
 app.Run();
 

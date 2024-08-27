@@ -596,8 +596,7 @@ namespace AspWebApi.Endpoint
         }
 
         public static async Task<IResult> GetAll
-             (
-               [FromServices] IPersonService service,
+             ( [FromServices] IPersonService service,
 
                CancellationToken token)
         {
@@ -658,8 +657,8 @@ namespace AspWebApi.Endpoint
                     e.PropertyName
                 }));
             }
-            await service.Add(p);
-            return Results.Ok(p);
+            var pp = await service.Add(p);
+            return Results.Ok(pp);
         }
     }
 }
